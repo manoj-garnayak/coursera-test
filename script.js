@@ -1,27 +1,22 @@
-/*
-Solution of assignment 4:
-Expected output:
-Hello Yaakov
-Good Bye John
-Good Bye Jen
-Good Bye Jason 
-Hello Paul
-Hello Frank
-Hello Larry
-Hello Paula
-Hello Laura
-Good Bye Jim
-*/
-(function(){
-	var names =["Yaakov","John","Jason","Paul","Frank","Larry","Paula","Laura","Jim"];
-	for (var i=0;i<names.length;i++){
-		var firstLetter=names[i].charAt(0).toLowerCase();
-		if (firstLetter==='j'){
-			byeSpeaker.speak(names[i]);
-		}else{
-			helloSpeaker.speak(names[i]);
-		}
-	}
-})();
-	
+// Event handling
+document.addEventListener("DOMContentLoaded",
+  function (event) {
+    
+    // Unobtrusive event binding
+    document.querySelector("button")
+      .addEventListener("click", function () {
+        
+        // Call server to get the name
+        $ajaxUtils
+          .sendGetRequest("data/name.txt", 
+            function (request) {
+              var name = request.responseText;
 
+              document.querySelector("#content")
+                .innerHTML = "<h2>Hello " + name + "!</h2>";
+            });
+
+        
+      });
+  }
+);
